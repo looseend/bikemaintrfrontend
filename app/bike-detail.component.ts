@@ -21,11 +21,12 @@ export class BikeDetailComponent implements OnInit {
     ngOnInit() {
         let id = +this._routeParams.get('id');
 
-        this._bikeService.getBike(id).then(bike => this.bike = bike);
+        console.log("INIT " + id);
+        
+        this._bikeService.getBike(id).subscribe(bike => this.bike = bike);
     }
 
     goBack() {
         window.history.back();
     }
-    
 }

@@ -1,4 +1,4 @@
-System.register(['./mock-bikes', 'angular2/http', 'angular2/core', 'rxjs/Observable'], function(exports_1, context_1) {
+System.register(['angular2/http', 'angular2/core', 'rxjs/Observable'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,13 +10,10 @@ System.register(['./mock-bikes', 'angular2/http', 'angular2/core', 'rxjs/Observa
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var mock_bikes_1, http_1, core_1, Observable_1;
+    var http_1, core_1, Observable_1;
     var BikeService;
     return {
         setters:[
-            function (mock_bikes_1_1) {
-                mock_bikes_1 = mock_bikes_1_1;
-            },
             function (http_1_1) {
                 http_1 = http_1_1;
             },
@@ -38,7 +35,10 @@ System.register(['./mock-bikes', 'angular2/http', 'angular2/core', 'rxjs/Observa
                         .catch(this.handleError);
                 };
                 BikeService.prototype.getBike = function (id) {
-                    return Promise.resolve(mock_bikes_1.BIKES).then(function (bikes) { return bikes.filter(function (bike) { return bike.id === id; })[0]; });
+                    return this._http.get("http://localhost:8080/bike/" + id)
+                        .map(function (res) { return res.json(); })
+                        .do(function (data) { return console.log(data); })
+                        .catch(this.handleError);
                 };
                 BikeService.prototype.handleError = function (error) {
                     // in a real world app, we may send the error to some remote logging infrastructure

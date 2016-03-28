@@ -32,7 +32,8 @@ System.register(['angular2/core', 'angular2/router', './bike.service'], function
                 BikeDetailComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     var id = +this._routeParams.get('id');
-                    this._bikeService.getBike(id).then(function (bike) { return _this.bike = bike; });
+                    console.log("INIT " + id);
+                    this._bikeService.getBike(id).subscribe(function (bike) { return _this.bike = bike; });
                 };
                 BikeDetailComponent.prototype.goBack = function () {
                     window.history.back();

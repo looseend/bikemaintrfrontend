@@ -18,9 +18,10 @@ export class BikeService {
     }
 
     getBike(id: number) {
-        return Promise.resolve(BIKES).then(
-            bikes => bikes.filter(bike => bike.id === id)[0]
-        );
+        return this._http.get("http://localhost:8080/bike/" + id)
+            .map(res => <Bike> res.json())
+            .do(data => console.log(data))
+                .catch(this.handleError);
     }
 
   private handleError (error: Response) {
