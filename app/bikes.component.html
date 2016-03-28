@@ -1,0 +1,13 @@
+<h2>My Bikes</h2>
+<ul class="bikes">
+    <li *ngFor="#bike of bikes" [class.selected]="bike === selectedBike" (click)="onSelect(bike)">
+        <span class="badge">{{bike.id}}</span> {{bike.name}}
+        <!-- each bike goes here -->
+    </li>
+</ul>
+<div *ngIf="selectedBike">
+    <h2>
+        {{selectedBike.name | uppercase}} is a bike
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
